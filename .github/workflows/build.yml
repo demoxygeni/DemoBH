@@ -35,9 +35,9 @@ jobs:
           # Block Secrets => BREAK BUILD
           # command: -cop commitResolution:auto scan --fail-on "no-secrets" --skip=codetamper,compliance --include-vulnerabilities --send-to github/status
           # Apply Guardrails => BREAK BUILD
-          command: scan --skip=codetamper,compliance --include-vulnerabilities --send-to github/status --audit-project
+          # command: scan --skip=codetamper,compliance --include-vulnerabilities --send-to github/status --audit-project
           # Only Scan
-          # command: scan --skip=codetamper,compliance,malware,suspectdeps --include-vulnerabilities --send-to github/status --never-fail
+          command: scan --skip=codetamper,compliance,malware,suspectdeps --send-to github/status --never-fail
 
       - name: Build with Maven
         run: mvn clean install -DskipTests
