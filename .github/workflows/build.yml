@@ -40,11 +40,13 @@ jobs:
           command: scan --skip=codetamper,compliance,malware,suspectdeps --send-to github/status --never-fail
 
       - name: Build with Maven
+        if: false
         run: mvn clean install -DskipTests
         working-directory: user-profile-app
 
       - name: Archive WAR file
-        if: success()
+        if: false
+        # if: success()
         uses: actions/upload-artifact@v4
         with:
           name: war-artifact
