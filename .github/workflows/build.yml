@@ -33,11 +33,11 @@ jobs:
           token: ${{ secrets.XYGENI_TOKEN }}
           gh_token: ${{ secrets.PAT_FOR_XYGENI_SCAN }}
           # Block Secrets => BREAK BUILD
-          # command: -cop commitResolution:auto scan --fail-on "no-secrets" --skip=codetamper,compliance --send-to github/status
+          # command: -cop commitResolution:auto scan --fail-on "no-secrets" --skip=codetamper,compliance --include-vulnerabilities --send-to github/status
           # Apply Guardrails => BREAK BUILD
           # command: scan --skip=codetamper,compliance --send-to github/status --audit-project
           # Only Scan
-          command: scan --skip=codetamper,compliance,malware,suspectdeps --send-to github/status --never-fail
+          command: scan --skip=codetamper,compliance,malware,suspectdeps --include-vulnerabilities --send-to github/status --never-fail
 
       - name: Build with Maven
         run: mvn clean install -DskipTests
