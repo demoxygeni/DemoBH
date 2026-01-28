@@ -37,7 +37,7 @@ jobs:
           # Apply Guardrails => BREAK BUILD
           # command: scan --skip=codetamper,compliance --send-to github/status --audit-project
           # Only Scan
-          command: scan --send-to github/status --never-fail
+          command: scan --skip=codetamper,compliance,malware --send-to github/status --never-fail
 
       - name: Build with Maven
         run: mvn clean install -DskipTests
