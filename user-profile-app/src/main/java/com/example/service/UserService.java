@@ -44,6 +44,7 @@ public class UserService {
         // SQL Injection vulnerability
         String q = "SELECT u FROM User u WHERE u.email = '" + email + "'";
         return entityManager.createQuery(q, User.class).getResultList();
+
     }
 
 }
